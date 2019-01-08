@@ -1,5 +1,7 @@
 Error: [remote rejected] master -> master (permission denied)
-to fix this error,
+
+Solution:
+---------
 Type command:
 
 git config --global --edit
