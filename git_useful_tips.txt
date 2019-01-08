@@ -1,0 +1,12 @@
+Error: [remote rejected] master -> master (permission denied)
+to fix this error,
+Type command:
+
+git config --global --edit
+
+Add these lines of configuration at the end of file:
+
+[credential]
+  helper = osxkeychain
+  useHttpPath = true
+--------------------------------------------------------------
