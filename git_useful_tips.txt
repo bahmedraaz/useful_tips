@@ -2,7 +2,7 @@ Error: [remote rejected] master -> master (permission denied)
 
 Solution:
 ---------
-Type command:
+Type the following command:
 
 git config --global --edit
 
