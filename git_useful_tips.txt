@@ -1,3 +1,4 @@
+---------------------------------------------------------------
 Error: [remote rejected] master -> master (permission denied)
 
 Solution:
@@ -12,3 +13,12 @@ Add these lines of configuration at the end of file:
   helper = osxkeychain
   useHttpPath = true
 --------------------------------------------------------------
+--------------------------------------------------------------
+Show the list of remote connections:
+git remote show
+
+show the url of the remote: Let's say we have two remote connection. One is origin and other is origin1. We want to see the url of origin
+1. git config --get remote.origin.url
+or
+2. git remote show origin
+-----------------------------------------------------------------------------------------------------------------------------------------
