@@ -1,1 +1,1 @@
-openPdf: xdg-open xxx.pdf
+Command to open pdf: xdg-open xxx.pdf
