@@ -1,0 +1,1 @@
+openPdf: xdg-open xxx.pdf
