@@ -5,4 +5,7 @@ The % key can be used for the following:
 	To jump between appropriate keywords, if supported by the ftplugin file, for example, between begin and  end in a Pascal program.
 
 	A nice keymap is: noremap % v%
-	This way, whenever you type % you jump to the matching object, and you visually select all the text in between. 
+	This way, whenever you type % you jump to the matching object, and you visually select all the text in between.
+
+move cursor to the last position:
+	hit the apostrophes(') twice 
