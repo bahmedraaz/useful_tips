@@ -1,0 +1,51 @@
+# These commands must be run with root/sudo
+
+apt-get install cmake
+apt-get install libgtest-dev
+apt-get install g++
+apt-get install mercurial
+
+# compile and setup google test:
+cd /usr/src/gtest
+cmake CMakeLists.txt
+make
+cp *.a /usr/lib
+
+# install boost:
+apt-get install libboost-all-dev
+
+# install spot:
+cd ~/
+
+#this links does not work
+#wget http://spot.lip6.fr/dl/spot-1.2.5.tar.gz #deprecated
+wget https://www.lrde.epita.fr/dload/spot/spot-1.2.5.tar.gz
+
+tar -zxvf spot-1.2.5.tar.gz
+cd spot-1.2.5/
+./configure
+make
+make check
+make install
+
+# grab texada:
+cd ~/
+#If the clone does not work, you may want to directly download the texada folder
+hg clone https://bestchai@bitbucket.org/bestchai/texada
+cd texada
+
+# setup environment to run texada (you'll want to add this line to your .bashrc or similar):
+export TEXADA_HOME=$HOME/texada
+
+# set up the uservars.mk file based on the example that's there:
+cp uservars.mk.example uservars.mk
+
+# only change the SPOT_INCL location since all other location
+# vars are available system-wide and need not be changed:
+sed -i "/^SPOT_INCL:=/c\SPOT_INCL:=${PWD%/*}/spot-1.2.5/src/" uservars.mk
+
+# build texada and texadatest
+make
+
+# run texadatest to make sure all the tests pass
+./texadatest
