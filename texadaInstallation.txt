@@ -49,3 +49,6 @@ make
 
 # run texadatest to make sure all the tests pass
 ./texadatest
+
+#if running ./texadatest showes error about ld library. Type the following command
+export LD_LIBRARY_PATH=~/spot-1.2.5/src/.libs/
