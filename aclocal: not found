@@ -1,0 +1,1 @@
+To resolve aclocal: not found error, install autotools-dev and automake packages in Ubuntu. This will resolve your error
