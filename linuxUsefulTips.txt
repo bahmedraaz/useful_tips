@@ -3,3 +3,8 @@ Command to open pdf: xdg-open xxx.pdf
 How to remove the locked file named 4913?
 *****************************************
 This is not a real file, since it does not show up in a directory listing (which is why I hadn’t spotted it before), and since it doesn’t exist, it can’t be deleted. However, it can be opened with another text editor such as gedit. If you do this, type in a character, and save, then the file takes on a real existence; it is no longer locked, and can be deleted in the usual way. Moreover, if you don’t do this but use vi again, the mysterious 4913 disappears; it seems to be toggled by the use of the editor.
+
+linux command to check disk usage
+*********************************
+https://www.ostechnix.com/find-size-directory-linux/
+
