@@ -1,0 +1,5 @@
+Type device manager in the windows search bar
+Go to cameras
+  -> Right click on Integrated Camera
+  -> Click uninstall device
+  -> Wait for a while. It will automatically install the driver again.
