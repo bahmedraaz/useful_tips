@@ -1,0 +1,3 @@
+clang -emit-llvm -S "fileName" -o "fileName.ll"
+opt -dot-cfg "fileName.ll"
+xdot "fileName.dot"
