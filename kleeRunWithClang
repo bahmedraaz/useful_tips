@@ -1,0 +1,6 @@
+rirst run the following command
+clang -I /home/bahmed/klee/include/ -emit-llvm -c fileNamee.c
+
+a fileName.bc file will be generated.
+Now run the following command.
+klee fileName.bc
