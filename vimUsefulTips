@@ -9,3 +9,9 @@ The % key can be used for the following:
 
 move cursor to the last position:
 	hit the apostrophes(') twice 
+
+Remove "_00" after each word in  a text file
+	Type :%s/_00//gc, then hit enter, then press a
+	
+Replace a word with another word
+	Type :g/replacable/s//replaceWith/g, then hit enter, then press a
