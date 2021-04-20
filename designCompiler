@@ -1,0 +1,58 @@
+*********
+04132021
+*********
+
+To get help: <command> -help
+To go to man page: man <command>
+
+report_design
+set_register_type -exact -flip_flop <flip_flop type from the library>
+
+report_cell
+report_cell [all_registers]
+report_cell {U2}
+
+
+report_reference
+
+get_references <reference Name>
+For example: get_references AO21X1 (returns the collection of instances of AO21X1)
+             get_references INV*    (returns the collection of instances of INV*)
+
+report_cell [get_references INV*]
+list_designs
+
+********
+04172021
+********
+To get the attribute of any cell
+get_attribute FSM_reg_0_ attributeName
+For example: get_attribute FSM_reg_0_ is_sequential
+If the FSM_reg_0_ cell is squential, it will return true
+
+To find all the attributes for cell class, type the following command 
+list_attribute -application -class cell
+
+Like the cell class, there are other classes, such as design, port, cell, clock, pin, net, lib, or reference
+
+To return a list of all sequential cells, type the following command.
+
+set allCells [get_object_name [get_cells -filter {is_sequential==true}]]
+
+Here, allCells is a list, not collection
+
+To get the length of the allCells list, type 
+llength llength $allCells
+
+To access the list element at index 1, type 
+lindex $allCells 1
+
+To append to a list, type 
+lappend allCells newCellName
+Note that, while using the lappend command, we didn't use $ sign in front of the allCells. However, while accessing the element and determining the lenght of the list, we used the $ sign. It is very important to remember.
+
+******************************
+Clear Screen in DC Shell
+******************************
+Type "exec clear" and hit enter
+
