@@ -1,0 +1,2 @@
+To invoke JasperGold GUI, type "jg" and hit enter.
+To invoke JasperGold shell/without GUI, type "jg -no_gui" and hit enter.
