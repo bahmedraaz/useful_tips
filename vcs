@@ -1,0 +1,1 @@
+Command to compile: vcs -Mupdate -v *.v -o out -kdb -debug_acc+all+dmptf -debug_region+cell+encrypt
