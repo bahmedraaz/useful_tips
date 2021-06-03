@@ -1,4 +1,4 @@
 1. Install pyinstaller by using "pip install pyinstaller"
-2. Then type this command: pyinstaller --onfile -w 'filename.py'
+2. Then type this command: pyinstaller --onefile -w 'filename.py'
 3. Some folders and files will be created. Go to dist foler, you will find the executable.
 4. To run the executable type ./nameOfTheExecutable and hit enter.
