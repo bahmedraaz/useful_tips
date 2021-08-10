@@ -1,0 +1,8 @@
+--How to embed fonts in pdf while compiling with pdfLaTeX in overleaf
+First, add a file called latexmkrc (without extensions) to your project, and then paste the following line in that file:
+$pdflatex = 'pdflatex %O %S; ps2pdf14 -dPDFSETTINGS=/prepress %B.pdf %B-embed.pdf; mv %B-embed.pdf %B.pdf';
+
+You may have to make some kind of small change in your .tex file to trigger a re-compilation and the post-processing to happen.
+N.B. This will not only embed the fonts but also compress too much. Some images might get affected. To avoid this you can type the following line in latexmkrc file
+
+$pdflatex = 'pdflatex %O %S; ps2pdf14 %B.pdf %B-embed.pdf; mv %B-embed.pdf %B.pdf';
