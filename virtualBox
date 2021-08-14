@@ -2,7 +2,7 @@ Problem 1:
   File permission issues with shared folders under Virtual Box:
 
 Solution 1.1
-  Run sudo adduser $USER vboxsf from terminal.
+  Run "sudo adduser $USER vboxsf" from terminal.
   (On Suse it's sudo usermod --append --groups vboxsf $USER)
 
   To take effect you should log out and then log in, or you may need to reboot.
