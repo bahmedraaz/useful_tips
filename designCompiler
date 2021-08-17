@@ -1,5 +1,24 @@
+**********
+08/17/2021
+**********
+**To get the list of input ports
+set inputPortList [get_ports -filter "direction==in"]
+or
+set inputPortList [all_inputs]
+In both cases inputPortList is a collection. The problem with the collection is that we cannot access individual element from the collection.
+If you check the length of the inputPortList by typing "llength $inputPortList", it will show the length is 1. However, it is not right. 
+To avoid this situation, you have to use modify the commands as following.
+
+set inputPortList [get_object_name [get_ports -filter "direction==in"]]
+or
+set inputPortList [get_object_name [all_inputs]]
+
+Now, check the length of inputPortList by typing "llength $inputPortList", it will show the size of the length.
+
+
+
 *********
-04132021
+04/13/2021
 *********
 
 To get help: <command> -help
@@ -23,31 +42,28 @@ report_cell [get_references INV*]
 list_designs
 
 ********
-04172021
+04/17/2021
 ********
-To get the attribute of any cell
+**To get the attribute of any cell
 get_attribute FSM_reg_0_ attributeName
 For example: get_attribute FSM_reg_0_ is_sequential
 If the FSM_reg_0_ cell is squential, it will return true
 
-To find all the attributes for cell class, type the following command 
+**To find all the attributes for cell class, type the following command 
 list_attribute -application -class cell
-
 Like the cell class, there are other classes, such as design, port, cell, clock, pin, net, lib, or reference
 
-To return a list of all sequential cells, type the following command.
-
+**To return a list of all sequential cells, type the following command.
 set allCells [get_object_name [get_cells -filter {is_sequential==true}]]
-
 Here, allCells is a list, not collection
 
-To get the length of the allCells list, type 
+**To get the length of the allCells list, type 
 llength llength $allCells
 
-To access the list element at index 1, type 
+**To access the list element at index 1, type 
 lindex $allCells 1
 
-To append to a list, type 
+**To append to a list, type 
 lappend allCells newCellName
 Note that, while using the lappend command, we didn't use $ sign in front of the allCells. However, while accessing the element and determining the lenght of the list, we used the $ sign. It is very important to remember.
 
