@@ -6,3 +6,6 @@ You may have to make some kind of small change in your .tex file to trigger a re
 N.B. This will not only embed the fonts but also compress too much. Some images might get affected. To avoid this you can type the following line in latexmkrc file
 
 $pdflatex = 'pdflatex %O %S; ps2pdf14 %B.pdf %B-embed.pdf; mv %B-embed.pdf %B.pdf';
+
+--Latex commands for different symbols
+https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols
