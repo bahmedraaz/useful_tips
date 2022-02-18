@@ -1,0 +1,11 @@
+--Create conda environment
+conda create --name envName
+
+--Activate conda environment
+conda activate envName
+
+--Deactivate conda environment
+conda deactivate 
+
+--Show list of conda environments
+conda env list
