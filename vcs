@@ -1,4 +1,4 @@
-***Command to compile: vcs -Mupdate -v *.v -o out -kdb -debug_acc+all+dmptf -debug_region+cell+encrypt
+***Command to compile: vcs -Mupdate -v design.v testBench.v -o out -kdb -debug_acc+all+dmptf -debug_region+cell+encrypt
 
 ***How to use $dumpfile and $dumpvars
 http://www.referencedesigner.com/tutorials/verilog/verilog_62.php
