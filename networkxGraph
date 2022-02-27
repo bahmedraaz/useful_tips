@@ -1,0 +1,32 @@
+-- How to vizualize networkx graph
+
+Example soultion 1:
+-------------------
+
+from pyvis.network import Network
+#net = Network(notebook=True)
+net = Network('1500px', '1500px')
+net.from_nx(graph)
+net.show("example.html")
+
+Exaple solution 2:
+-----------------
+
+from pyvis.network import Network
+
+g = nx.Graph()
+ 
+g.add_edge(1, 2)
+g.add_edge(2, 3)
+g.add_edge(3, 4)
+g.add_edge(1, 4)
+g.add_edge(1, 5)
+
+#net = Network(notebook=True)
+net = Network('1000px', '1000px', notebook=True)
+net.from_nx(g)
+net.show("graph.html")
+
+For more info, look into the folloiwng site
+--------------------------------------------
+https://towardsdatascience.com/visualizing-networks-in-python-d70f4cbeb259
