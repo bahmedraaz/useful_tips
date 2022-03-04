@@ -1,0 +1,15 @@
+--How to backup any folder to onedrive?
+
+Solution: Usually onedrive is capable of syncing Desktop, Documents and Picture folder. You just have to drag and drop this folder to onedrive, they will automatically be backed up.
+However, to backup other folder, you have to follow the step below.
+
+Create hard link between a folder in onedrive and the folder you want to take backup.
+  Example Command: mklink /j "C:\Users\BAHMED\OneDrive - University of Florida\computerBackup" "C:\myDrive\testFolder" 
+This command will create this folder : "C:\Users\BAHMED\OneDrive - University of Florida\computerBackup", which will be used to backup this folder "C:\myDrive\testFolder".
+
+Note that if you already create "C:\Users\BAHMED\OneDrive - University of Florida\computerBackup" before running the above command, it will give you an error.
+
+Now, if you want to delete the hardlink, simply delete the backup folder, the target folder will not be affected. You can manually delete or use the command. An example command to 
+delete "C:\Users\BAHMED\OneDrive - University of Florida\computerBackup" in windows is shown below.
+
+rmdir "C:\Users\BAHMED\OneDrive - University of Florida\computerBackup"
