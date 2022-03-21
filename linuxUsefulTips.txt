@@ -1,36 +1,36 @@
-**Problem1: 
+**Problem 1: 
   How to open pdf in Linux?
 Solution: 
   Command to open pdf: xdg-open xxx.pdf
 -------------------------------------
 
-**Problem2: 
+**Problem 2: 
   How to remove the locked file named 4913?
 
 Solution: 
   This is not a real file, since it does not show up in a directory listing (That is why I hadn’t spotted it before), and since it doesn’t exist, it can’t be deleted. However, it   can be opened with another text editor such as gedit. If you do this, type in a character, and save, then the file takes on a real existence; it is no longer locked, and can be    deleted in the usual way. Moreover, if you don’t do this but use vi again, the mysterious 4913 disappears; it seems to be toggled by the use of the editor.
 -------------------------------------------
 
-**Problem3: 
+**Problem 3: 
   What is the linux command to check disk usage
 
 Solution: 
   https://www.ostechnix.com/find-size-directory-linux/
 ---------------------------------------------
 
-**Problem4:
+**Problem 4:
   What is the linux command to see the tree structure of a directory?
 
 Solution: 
   tree -a folderName
 -------------------------------------------------
 
-**Problem5: How to remove all contents in a directory except one file?
+**Problem 5: How to remove all contents in a directory except one file?
 
 Solution:
   rm -rf -v !("file_name")
 
-**Problem6: How to remove all contents in a directory except two files?
+**Problem 6: How to remove all contents in a directory except two files?
 
 Solution:
   rm -rf -v !("file_1_name" | "file_2_name")
@@ -38,5 +38,6 @@ Solution:
 For more information, look into this link: https://www.tecmint.com/delete-all-files-in-directory-except-one-few-file-extensions/
 
 
-
+**Problem 7: command to convert text file to csv
+sed 's/ \+/,/g' ifile.txt > ofile.csv
 
