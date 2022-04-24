@@ -1,0 +1,4 @@
+How to change font size in jupyter lab?
+--Go to settings -> Advanced Settings Editor
+--On the left panel, click on Notebook.
+--On the right side, under "Code Cell Configuration", change the Font size
