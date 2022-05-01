@@ -1,0 +1,7 @@
+1. Open excel
+2. Load the text file to excel
+    click on Data->From Text/CSV
+    click on load
+3. File->Save As
+4. Change the file extension to .txt
+5. Save the file
