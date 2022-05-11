@@ -1,0 +1,13 @@
+While runnig "python ./examples/example_graphgen.py -t top -s top.led ./verilog/test.v ", the following error occured
+
+Generating LALR tables
+WARNING: 183 shift/reduce conflicts
+Traceback (most recent call last):
+  File "/home/bahmed/Desktop/tools/hardware/Pyverilog/./examples/example_graphgen.py", line 107, in <module>
+    main()
+  File "/home/bahmed/Desktop/tools/hardware/Pyverilog/./examples/example_graphgen.py", line 100, in main
+    graphgen.generate(target, walk=options.walk, identical=options.identical,
+TypeError: generate() got an unexpected keyword argument 'reorder'
+
+To fix this error, 
+  Replace reorder=options.reorder with do_reorder=options.reorder of line 100 of example/example_graphgen.py
