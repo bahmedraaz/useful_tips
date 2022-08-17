@@ -1,5 +1,5 @@
 open cmd as administrator
 type the following command and hit enter
-  cmd /c"echo off/clip"
-  
+  cmd /c “echo off | clip”
+
  For more information, watch this video: https://www.youtube.com/watch?v=JBH5wOThKBc&ab_channel=MDTechVideos
