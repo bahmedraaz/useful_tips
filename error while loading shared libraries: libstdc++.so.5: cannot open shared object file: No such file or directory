@@ -1,0 +1,28 @@
+How to fix this error?
+"error while loading shared libraries: libstdc++.so.5: cannot open shared object file: No such file or directory"
+
+Why does this error occur?
+This is because the tool you are trying to run is 32 bit, but the platform is 64 bit.
+To be specific, in this case, I was trying to run the tool calle features (creates features from a cnf file) and it is 32 bit application.
+
+If you want to run a 32 bit application to a 64 bit platform, you have to have the multi-architecture support in your platform. In summary, to fix the above problem, 
+follow the steps below.
+
+1. To check the architecture of the system type the following command
+    command: dpkg --print-architecture
+    output: In my virtual machine, it prints, amd64
+    
+    This means, your platform is 64 bit architecture
+    
+2. Add 32 bit architecture. To do that, run the following command
+    Command: sudo dpkg --add-architecture i386
+    
+3. Check if the 32 bit architecture is added.
+    Command: sudo dpkg --add-architecture i386
+    Output: i386
+    
+4. Install the 32-bit library for which you are getting the error.
+    Command:  sudo apt-get update
+              sudo apt-get install libstdc++5:i386
+              
+The eror should go away....
