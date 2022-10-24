@@ -1,0 +1,147 @@
+formality
+Last Updated: Wednesday, 01 May 2019 13:38Published: Wednesday, 01 May 2019 13:38Hits: 877
+Formality: synopsys tool for running RTL to gate equiv (or gate to gate equiv, or rtl to rtl equiv ) using formal verification (unlike verification thru simulation, which reqire i/p patterns)
+2 basic tools:
+1. Equivalence checker: prove or disprove that one design is logically equiv to another. Formality an example of this.
+2. Model checker: prove or disprove that a design adheres to specified set of logical properties.
+
+Equiv checking is 4 step process:
+---------------
+1. Design read and elaboration => Rd set of design and library files, and elaborates them into a format ready for equivalency checking that fully represents the logic of the user-defined top-level model. During this phase, you establish the reference and implementation designs, along with corresponding compare points and logic cones.
+Logic cones: consist of combo logic.
+Compare points are primary outputs, internal registers, black box input pins, or nets driven by multiple drivers where at least one driver is a port or black box. The design objects at which logic cones terminate are either primary inputs or other compare points.
+
+2. setup to preempt differences: To avoid false failures. Ex: impl design has scan added while RTL doesn't. so, set constant to disable scan during checking. We also provide guidance to assist matching, add black boxes and other constraints (ex: limit no. of i/p values that will be considered during verification)
+
+3. matching: match each primary o/p, seq element, blackbox i/p pin and qualified net in impl with a comparable design obj in ref. This one to one correspondence is not required for an impl that contains extra PO, or when there are extra registers in ref or impl design, and no compare points fail during verif. matching techniques to map compare points:
+A. name based (automatic) => exact name based or name filtering (i.e memreg__[1][0] is matched to MemReg_1_0)
+B. non-name based. First the tool tries topological equiv (by looking at fanin cone toplogy), and then signature analysis(by doing functional signature which are derived from random pattern generator, and by topological signature, which are derived from fanin cone toplogy). User can then provide user provided mapping points where the tool has problem.
+
+4. verification: Fro every i/p patter, ref and impl designs give same response. 2 types of design equiv:
+A. Design consistency => verif passes if "x" in ref, matches with "0 or 1" in impl.
+B. Design equality => additional requirement that verif will pass only if "x" in ref matches with "x" in impl.
+
+cmd line i/f: fm_shell
+-------------
+#start formality on cmd line
+fm_shell -2012.06 -f scripts/rtl2gate.tcl |tee logs/rtl2gate.log
+
+#DW lib are here: /apps/synopsys/syn/2008.09-SP5/dw/dw*/src/* (both in .v and .vhdl)
+set hdlin_dwroot /apps/synopsys/syn/2008.09-SP5/ => specifies DesignWare root. By default, its empty meaning DW instances will be left elaborated as black boxes.
+set enable_multiplier_generation true => enable Formality to generate multiplier architectures for all multiplier instances in  the  reference  design.
+set hdlin_multiplier_architecture "dw_foundation" => this variable helps define the architecture Formality will generate for multiplier or DW02_multp instances encountered in the reference design   when  multiplier  generation  is  enabled. Arch may be none, csa, nbw, wall or dw_foundation. dw_foundation  - Attempt to choose the same architecture Design Compiler was likely to have chosen for each  multiplier  instance.
+
+#create_container: creates empty container and establish it as current. this cmd loads the GTECH tech library, and any other shared tech libraries, into the new container. All of the info about 1 design (such as design lib, tech lib, etc) are contained in 1 container, and for other design in other container.
+#create containers for both rtl and gate. RTL doesn't need tech lib in it's container, but impl needs as it has std cells.
+create_container rtl1
+create_container gate1
+
+#read_db: reads designs or tech lib into the current container. Unless  you  specify  the name of the design or tech library, the command uses the default design library named WORK and the default tech library named TECH_WORK.
+#NOTE: our designs (digtop) are NOT in .db format, but in verilog format, so we use read_db to read tech library only. read_verilog is used to read design.
+#When we don't specify the container name, read_db reads tech lib into all open containers (so it reads in both rtl1 and gate1). To read it in impl(gate) container, we can add option -i, or to read it in ref(rtl) container, we can add option -r.  
+read_db -tech /db/pdkoa/lbc8lv/.../synopsys/bin/MSL445_W_125_1.6_CORE.db => read tech lib for core cells in both containers
+read_db -tech /db/pdkoa/lbc8lv/.../synopsys/bin/MSL445_W_125_1.6_CTS.db => CTS cells
+read_db -tech /data/SPORSHO_2P0_OA_DS/ .../HDL/Memories/fedc01024064012/cad_models/fedc01024064012_W_125_1.6.db => read fram, sram cells (needed even though we blackbox these cells, otherwise elaborate and link (set_top cmd) won't be able to link these cells).
+
+#Note that we are reading tech lib in .db format instead of reading verilog model files. We could have read verilog model files for these std cells, which would have yielded same result. It's better to use verilog model files since we already synthesized using liberty files, so running Formality with verilog model files makes sure that liberty and verilog models are in sync. However, verilog model must be in form of synthesizable RTL or structural netlist (no behavioral constructs or simulation models allowed).
+#read_verilog -i -tech /db/pdk/lbc8lv/rev1/diglib/msl445/r2.3.0/verilog/models/*.v => -tech specifies that data goes into tech lib instead of design lib. -i means it's for impl, while -r means it's for reference. -con gives name of container where it should go (when we have more than 1 ref container). This cmd creates efficient gate level models from verilog modules and user defined prmitive desc in verilog models. These new gate level models are then used during verif.
+
+# This is needed when DC added clock gating cells (Absoultly necessary to use this). Use  this  variable  to  specify  whether Formality allows designs with clock-gating to successfully verify against designs without  clock-gating. By  default,  Formality  does  not  consider  such  designs equivalent, because of the functional difference that could  occur  if  the  gating logic introduces an edge on a flip-flop clock pin that may not occur if the same input patterns are applied to the non-clock-gated circuit. values are none(default), low, high or any. considers latch-based clock gating, and combinational clock gating. It checks for glitch violations on comb clk gating designs. "any" implies either hold clk low (for +ve edge flop, impl using and gate or high for -ve edge flop, impl using or gate) when inactive , or hold clk high (for +ve edge flop or low for -ve edge flop) when inactive
+set verification_clock_gate_hold_mode any
+
+#Clk gating results in 2 failing points:
+1. clk gating latch is a compare point in impl, but doesn't have matching point in ref
+2. logic feeding into clk of flop changes, so compare point created at flop fails.
+
+# Read SVF file, set_svf sets SVF. The SVF provides valuable information that can be used during compare point matching  to  facilitate alignment of compare points in the designs to be verified. Filenames Specifies the name of the SVF files to read  or  directories  to search. SVF file is generated by DC (we use set_svf in DC script to set path for svf file, DC auto generates this svf file whenever we exit DC. If we don't exit DC then svf is stale file), and contains info about tranformed names and compare points to be used in formality. It's a binary file. Without svf, Formality will usually fail matching.
+set_svf /db/Hawkeye/design1p0/HDL/Synthesis/digtop/svf/digtop.svf
+
+#read_verilog: Reads one or more Verilog files (RTL or structural). Designs (RTL/structural verilog) are  read into  design  libraries, and Verilog library cell descriptions (AN20.v, INV10.v, etc) are read in as technology libraries. By default, the tool  places  designs  into the  default  design library named WORK (unless we use -libname option), and cell descriptions into the default technology library named TECH_WORK. These are placed in container specified (FM_WORK/rtl1/WORK/). option -95|-01|-05|-09 specifies IEEE std for verilog (1995,2001,2005,2009 default being 2005). -vcs "VCS_OPTIONS" reads in vcs options for reading in dir(-y) etc. This is helpful when reading large number of files in a dir. However, -vcs option doesn't seem to work.
+# Read RTL into RTL container
+read_verilog -container rtl1 -libname WORK -01 { /db/Hawkeye/design1p0/HDL/Source/golden/global.v
+/db/Hawkeye/design1p0/HDL/Source/golden/digtop.v ... one line for each file ...." } -vcs "-v extra.v -y libs/lib1" => NOTE: -vcs option doesn't work. It's ignored by tool.
+#we can also read multiple files by using tcl list cmd. We set RTL_DIR by using tcl cmd: set RTL_DIR ../source
+#read_verilog -container rtl1 -libname WORK -01 [list \
+                 "$RTL_DIR/ahb_apb_bridge.v"  ... \
+                 "$RTL_DIR/cm0ik_ahb_fram_bridge.v" ]
+
+# Elaborate and link design. set_top Resolves cell references and elaborates RTL designs. We can use "set hdlin_auto_top true", which causes Formality to automatically determine top level module.
+set_top rtl1:/WORK/digtop => here we say that top level module is digtop. If we want to do hier matching, we can choose one of the sub-modules as top level module. then matching will proceed starting from that module.
+
+# Read Netlist into Gate container. We use -netlist option for structural verilog, since it reads it faster this way.
+read_verilog  -container gate1 -libname WORK -netlist /db/Hawkeye/.../digtop_final_route.v
+
+# Elaborate and link design
+set_top gate1:/WORK/digtop => for gate netlist, we set top level module to digtop. Again, we can choose some lower level module as top-level module if we want to do hier matching starting from some lower level module.
+
+#dir structure:
+--------------
+FM_WORK dir is where Formality keeps all designs. It has these dir:
+1. Tech lib: dir MSL445_W_125_1.6_CORE.db,MSL445_W_125_1.6_CTS.db etc. are created when we run "read_db -tech"
+2. design lib: dir for container rtl,gate etc are created when we run read_verilog for ref/impl. Inside these design lib, we have WORK, TECH_WORK and FM_BBOX dir. WORK contains dir for digtop and all other modules, which contain respective modules in .dmp binary format. TECH_WORK is not created in our case, since tech lib are read as db and not as verilog, so they are kept separately as tech lib. to get TECH_WORK dir, we have to read tech lib as "read_verilog -tech"
+3. GTECH, r, i dir are created by default.
+--------------
+
+# Set RTL as "reference" design and GATE as "implementation" design
+set_reference_design  rtl1:/WORK/digtop
+set_implementation_design  gate1:/WORK/digtop
+
+# Set constants.  type can be port, pin, net or cell(register)
+#We disable scan, since scan flops are not present in RTL. ScanEn pin of all flops is tied to 1, so that mux inside flops only selects D pin.
+set_constant -type port rtl1:/WORK/digtop/scan_mode_in  0
+set_constant -type port gate1:/WORK/digtop/scan_mode_in 0
+set_constant -type port rtl1:/WORK/digtop/scan_en_in  0
+set_constant -type port gate1:/WORK/digtop/scan_en_in 0
+
+#to force some cell to a constant value for debug purpose
+#set_constant -type cell rtl1:/WORK/apb_cpsw/cpsw0_reg[0] 1
+#set_constant -type cell gate1:/WORK/apb_cpsw/cpsw0_reg_0 1
+
+#setting black boxes for IP/Macro. Needed when we want to rep logic that's unknown. i/p pins of blackbox become compare points, while o/p are treated as i/p points to other logic cones. blackbox in impl is considered equiv to blackbox in ref design, so any mismatch within the black-boxed design won't be caught. We sometimes have to set pin/port dirn for these blackboxes as Formality may not be able to determine dirn, and will assume the pin/port as bidir. Use "set_direction" cmd.
+#set_black_box rtl1:/WORK/dig_top/u_8kB_fram/u_fram => omiting fram instance (particular instance name and not module name) for matching from rtl container. u_8kB_fram is the fram_wrapper, while u_fram is the actual fram module(fedc01024064012). sometimes we might need to blackbox the wrapper as pins on actual fram might be different in impl because of extra buffered clk pins, changed names of some pins, etc.
+#set_black_box gate1:/WORK/dig_top/u_8kB_fram/u_fram
+
+#set constraints like 1 hot(One control point at logic 1; others at logic 0), 1 cold(One control point at logic 0; others at logic 1), coupled(related ctl points always at same state), Mutually exclusive(two ctl points always at opposite state) or user defined (user defines the legal state of the control points).
+#set_constraint 1hot {Q_reg[0] Q_reg[1] Q_reg[2]} ref:/WORK/digtop
+
+#report setup statistics before running match and verify
+report_setup_status => reports all warning,setup and other stats
+
+# Match mapped points. Formality performs matching and reports summary. If unmapped points remain, You can issue commands that control matching (such as  set_compare_rule or  set_user_match) .
+match
+
+#name based mapping for eco fixes, as eco fixes may change names of some flops (due to swapping, spare cell use, etc)
+#set_user_match [-type <pin|port|net|cell>] [-inverted|-noninverted] RTL_OBJ_ID GATE_OBJ_ID =>
+#-type is only needed if name of specified design object is associated with more than one object type.
+#-inverted/noninverted specifies if design obj have inverted or noninverted relationship (default is unknown relationship. If "verification_inversion_push" is not enabled, then all unknown polarities will default  to  noninverted. If "verification_inversion_push" is enabled, Formality will try to determine  the  polarity  for  registers that  have unspecified polarities).
+ex: set_user_match rtl1:/WORK/digtop/sray_regs/deadtime_reg[0]  gate1:/WORK/digtop/sray_regs/deadtime_reg_1 => 1 will be o/p for success, while 0 is o/p for failure. Make sure you get "1" after running this cmd.
+
+#set_user_match cmd is needed when doing block level verification for clk pins, as clk pins might be buffered and be named differently, so need to match as follows:
+#set_user_match r: /WORK/design/clk i:/WORK/design/clk_L0_buf
+
+#actual mapping (user defined match are applied at match. To remove user match, do undo_match, and then reissue match cmd)
+match => match ensures that there are no mismatched logic cones, so that Formality can proceed with verification.
+
+# Report unmatched points
+report_unmatch => we should see any unmatched points, except for clk-gat latches in clk-gated designs.
+
+# Verify and report success. All compare points are verified in reference and impl, and summary shows: passing (all compare points are equiv), failing(some compare points are non-equiv), aborted(when compare couldn't be identified as passing or failing. happens due to combo loop or compare points too difficult to verify) and not compared (some compare points are unverified or not verified. this happens when failing point limit has been exceeded or there was some run error). Based on this, final ver result is succeeded, failed or inconclusive(aborted or not comapred).
+verify => any compare points unmatched by match cmd above, and tried to be matched here. verify cmd runs match if match hasn't been run before.
+
+# report Combinational Loops
+report_loops -ref => there should be no loops in ref design
+report_loops -impl => there should be no loops in gate design
+
+# Report failures
+report_fail
+
+# analyze src of failure (shows possible src of failure)
+analyze_points -failing
+
+#start gui to help in debug (shows all failing patterns)
+start_gui
+
+exit
+
+RESULTS:
+----------
