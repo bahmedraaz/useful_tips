@@ -6,6 +6,8 @@ pip install torch-cluster     -f https://pytorch-geometric.com/whl/torch-{TORCH}
 pip install torch-spline-conv -f https://pytorch-geometric.com/whl/torch-{TORCH}+{CUDA}.html
 pip install torch-geometric 
 
+where ${CUDA} and ${TORCH} should be replaced by the specific CUDA version (cpu, cu102, cu113, cu115) and PyTorch version (1.11.0, 1.12.0), respectively.
+
 In jupyter notebook
 --------------------
 !pip install torch-scatter     -f https://pytorch-geometric.com/whl/torch-{TORCH}+{CUDA}.html
