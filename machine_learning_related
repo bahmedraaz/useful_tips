@@ -1,0 +1,10 @@
+How to save and load a trained model
+  import pickle
+  
+  #save/dump the model
+  pickle.dump(model, open('model.pkl', 'wb'))
+  
+  #load the model
+  pickled_model = pickle.load(open('model.pkl', 'rb'))
+  
+  pickled_model.predict(X_test)
