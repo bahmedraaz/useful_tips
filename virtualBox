@@ -11,3 +11,30 @@ Solution 1.2
   Edit the file /etc/group (you will need root privileges). Look for the line vboxsf:x:999 and add at the end :yourusername -- use this solution if you don't have sudo.
   To take effect you should log out and then log in, or you may need to reboot.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Problem 2:
+ How to create shared folder between virtualbox ubuntu guest to windows host?
+ 
+Solution:
+
+  https://www.youtube.com/watch?v=TtTtpPL0L8I&ab_channel=MolecularSimulation
+
+  a. Go to the virtual machine in virtual box.
+  b. click on settings
+  c. click on Shared Folders
+  d. click on the plus (+) sign on the right, it shows "Adds new shared folder"
+  e. Assign folder path, folder name.
+  f. Select Auto-mount
+  g. Select Make Permanent (if this option is available)
+  h. click ok and run the virtual machine
+  
+  i. After restarting, in the file explorer section on the left, you should see sf_<folder name>. This folder name is the name you assigned at step e.
+  j. Click on this folder. If it shows you don't have permission, use the following command
+      sudo adduser $USER vboxsf
+  You are done and you should be able to share files.
+  
+  Note: If after step i, you don't see the folder sf_<folder name> on the filer explorer panel, you should run the following commands.
+  
+  sudo apt-get update
+  sudo apt-get install virtualbox-guest-dkms
+  sudo apt-get install virtualbox-guest-utils
