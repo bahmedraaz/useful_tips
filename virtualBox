@@ -23,7 +23,7 @@ Solution:
   b. click on settings
   c. click on Shared Folders
   d. click on the plus (+) sign on the right, it shows "Adds new shared folder"
-  e. Assign folder path, folder name.
+  e. Assign folder path, folder name. (Important: the folder name should be all small letters)
   f. Select Auto-mount
   g. Select Make Permanent (if this option is available)
   h. click ok and run the virtual machine
@@ -34,6 +34,7 @@ Solution:
   You are done and you should be able to share files.
   
   Note: If after step i, you don't see the folder sf_<folder name> on the filer explorer panel, you should run the following commands.
+  Important: the folder name in step e should be all small letters
   
   sudo apt-get update
   sudo apt-get install virtualbox-guest-dkms
