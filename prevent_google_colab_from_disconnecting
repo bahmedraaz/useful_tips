@@ -1,0 +1,12 @@
+https://medium.com/@daianan
+
+So to prevent this just run the following code in the console and it will prevent you from disconnecting.
+
+Ctrl+ Shift + i to open inspector view . Then goto console.
+
+function ClickConnect(){
+console.log("Working"); 
+document.querySelector("colab-toolbar-button#connect").click() 
+}
+setInterval(ClickConnect,60000)
+It would keep on clicking the page and prevent it from disconnecting.
