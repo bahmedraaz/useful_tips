@@ -1,8 +1,14 @@
 # Install in windows 10 without cuda
 ---------------------------------------
+1. Install python 3.9+
 
-pip install torch-scatter torch-sparse -f https://data.pyg.org/whl/torch-1.13.0+cpu.html
-pip install torch-geometric
+2. Install torch with pip(not with conda) using following command
+  pip install torch torchvision torchaudio
+  for more info in installing torch, visit https://pytorch.org/
+
+3. Install torch geometric using following commands
+  pip install torch-scatter torch-sparse -f https://data.pyg.org/whl/torch-1.13.0+cpu.html
+  pip install torch-geometric
 
 In jupyter notebook
 --------------------
