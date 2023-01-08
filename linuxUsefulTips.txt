@@ -1,36 +1,43 @@
-**Problem 1: 
+**Problem:
+  Copy first n number of files from one directory to another
+Solution:
+  find source_directory -maxdepth 1 -type f |head -10|xargs cp -t destination_directory
+  Here, 10 is the number of files
+------------------------------------------
+
+**Problem: 
   How to open pdf in Linux?
 Solution: 
   Command to open pdf: xdg-open xxx.pdf
 -------------------------------------
 
-**Problem 2: 
+**Problem: 
   How to remove the locked file named 4913?
 
 Solution: 
   This is not a real file, since it does not show up in a directory listing (That is why I hadn’t spotted it before), and since it doesn’t exist, it can’t be deleted. However, it   can be opened with another text editor such as gedit. If you do this, type in a character, and save, then the file takes on a real existence; it is no longer locked, and can be    deleted in the usual way. Moreover, if you don’t do this but use vi again, the mysterious 4913 disappears; it seems to be toggled by the use of the editor.
 -------------------------------------------
 
-**Problem 3: 
+**Problem: 
   What is the linux command to check disk usage
 
 Solution: 
   https://www.ostechnix.com/find-size-directory-linux/
 ---------------------------------------------
 
-**Problem 4:
+**Problem:
   What is the linux command to see the tree structure of a directory?
 
 Solution: 
   tree -a folderName
 -------------------------------------------------
 
-**Problem 5: How to remove all contents in a directory except one file?
+**Problem: How to remove all contents in a directory except one file?
 
 Solution:
   rm -rf -v !("file_name")
 
-**Problem 6: How to remove all contents in a directory except two files?
+**Problem: How to remove all contents in a directory except two files?
 
 Solution:
   rm -rf -v !("file_1_name" | "file_2_name")
@@ -38,6 +45,6 @@ Solution:
 For more information, look into this link: https://www.tecmint.com/delete-all-files-in-directory-except-one-few-file-extensions/
 
 
-**Problem 7: command to convert text file to csv
+**Problem: command to convert text file to csv
 sed 's/ \+/,/g' ifile.txt > ofile.csv
 
