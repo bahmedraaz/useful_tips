@@ -6,3 +6,6 @@ Source: https://www.youtube.com/watch?v=hgzuxRc7n6M&list=PLZU5hLL_713x0_AV_rVbay
 -- Do not assign to the same variable from more than one always block
 -- In a combinational always block, there are statements with blocking assignment, which has variables in the left hand side and right hand side. Always add all the variables
    in the RHS in the sensitivity list.
+-- Make sure that every if has an else block, specially in the combinational always block. Otherwise during synthesis.
+-- "assign" statement is used outside of always block, while to assign a variable inside the always block the blocking (=) and non-blockin (<=) assignment is used for
+    combinational and sequential always block respectively. In that case the variable in LhS should be declared as "reg"
