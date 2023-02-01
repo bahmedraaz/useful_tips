@@ -16,4 +16,4 @@ Source: https://www.youtube.com/watch?v=hgzuxRc7n6M&list=PLZU5hLL_713x0_AV_rVbay
     
 || Note ||
 -- By default verilog treats all vectors as unsigned
--- To make a constant signed add s after apostrophe, 10'sh37c
+-- To make a constant signed add s after apostrophe, 10'sh37C
