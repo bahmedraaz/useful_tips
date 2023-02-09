@@ -1,7 +1,17 @@
 Problem:
   How to make full screen for ubuntu in virtual box
 Solution:
-  https://www.youtube.com/watch?v=1cdixRIkcGM&ab_channel=ITCONTENTS
+  Source: https://www.youtube.com/watch?v=1cdixRIkcGM&ab_channel=ITCONTENTS
+  
+  open terminal and type the following commands
+    sudo apt update
+    sudo apt install build-essential dkms linux-headers-$(uname -r)
+  Then form the menu, click on devices -> insert Guest Addition CD Image
+  A CD image will be shown in the left pannel. 
+  Click on that and it will take you inside that folder.
+  You will find a file named autorun.sh
+  Run this file by typing ./autorun.sh
+  You are done...
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 Problem: 
   File permission issues with shared folders under Virtual Box:
