@@ -46,6 +46,7 @@ Solution:
   i. After restarting, in the file explorer section on the left, you should see sf_<folder name>. This folder name is the name you assigned at step e.
   j. Click on this folder. If it shows you don't have permission, use the following command
       sudo adduser $USER vboxsf
+      Then restart the machine
   You are done and you should be able to share files.
   
   Note: If after step i, you don't see the folder sf_<folder name> on the filer explorer panel, you should run the following commands.
