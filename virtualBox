@@ -49,8 +49,9 @@ Solution:
   You are done and you should be able to share files.
   
   Note: If after step i, you don't see the folder sf_<folder name> on the filer explorer panel, you should run the following commands.
-  Important: the folder name in step e should be all small letters
   
   sudo apt-get update
   sudo apt-get install virtualbox-guest-dkms
   sudo apt-get install virtualbox-guest-utils
+  
+  Important: the folder name in step e should be all small letters
