@@ -1,18 +1,23 @@
-Problem 1: 
+Problem:
+  How to make full screen for ubuntu in virtual box
+Solution:
+  https://www.youtube.com/watch?v=1cdixRIkcGM&ab_channel=ITCONTENTS
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Problem: 
   File permission issues with shared folders under Virtual Box:
 
-Solution 1.1
+Solution 1
   Run "sudo adduser $USER vboxsf" from terminal.
   (On Suse it's sudo usermod --append --groups vboxsf $USER)
 
   To take effect you should log out and then log in, or you may need to reboot.
 
-Solution 1.2
+Solution 2
   Edit the file /etc/group (you will need root privileges). Look for the line vboxsf:x:999 and add at the end :yourusername -- use this solution if you don't have sudo.
   To take effect you should log out and then log in, or you may need to reboot.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Problem 2:
+Problem:
  How to create shared folder between virtualbox ubuntu guest to windows host?
  
 Solution:
