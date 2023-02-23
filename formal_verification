@@ -1,0 +1,4 @@
+While writing property in .sv file, if you want to use s_eventually, nexttime, strong() this kind of operators, you must analyze the .sv file using systemVerilog 2009
+in jaspergold. The command that should be added in prove.tcl or in the terminal of jaspergold is as follows.
+
+  analyze -sv09 file_name.sv
