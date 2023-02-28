@@ -1,0 +1,13 @@
+---------------------------------------------------------
+Port definition template: Direction, kind, type, name
+For example: module mux2x1(
+                  input wire logic in0,
+                  input wire logic in1,
+                  input wire logic sel,
+                  output variable logic out
+              );
+              
+              endmodule;
+Default kind of input is wire
+Default kind of output is variable
+---------------------------------------------------------
