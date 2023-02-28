@@ -10,4 +10,6 @@ For example: module mux2x1(
               endmodule;
 Default kind of input is wire
 Default kind of output is variable
----------------------------------------------------------
+
+Usually, you don't need to mention the kind (wire, variable). Default is good
+-----------------------------------------------------------------------------
