@@ -1,4 +1,8 @@
 ---------------------------------------------------------
+Outside of always block, you can't use "=" to assign a value. Rather you have to explicitly use the keyworkd assign
+For example, assign a = b
+You can't just use a = b. It will through error
+---------------------------------------------------------
 Port definition template: Direction, kind, type, name
 For example: module mux2x1(
                   input wire logic in0,
