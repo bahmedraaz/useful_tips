@@ -1,0 +1,4 @@
+# install pip-autoremove
+pip install pip-autoremove
+# remove "somepackage" plus its dependencies:
+pip-autoremove somepackage -y
