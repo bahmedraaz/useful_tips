@@ -38,6 +38,13 @@ the backslash nor the terminating whitespace is considered to be a part of the i
 \a+b-c
 \**my_name**
 
+
+Vectors can be declared at [high# : low#] or [low# : high#], but the left number in the
+squared brackets is always the most significant bit of the vector. In the example shown
+below, bit 0 is the most significant bit of vector virtual_addr.
+
+reg [0:40] virtual_addr; // Vector register, virtual address 41 bits
+wide
 ------------------------------------------------------------------------------------------------------------------------
 
 Source: https://www.youtube.com/watch?v=hgzuxRc7n6M&list=PLZU5hLL_713x0_AV_rVbay0pWmED7992G&index=7&ab_channel=AdiTeman
