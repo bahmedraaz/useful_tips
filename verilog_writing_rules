@@ -9,8 +9,7 @@ Sized numbers are represented as <size> '<base format> <number>
 16'd255 // This is a 16-bit decimal number.
 
 Unsized numbers
-Numbers that are specified without a <base format> specification are decimal numbers
-by default. Numbers that are written without a <size> specification have a default number
+Numbers that are specified without a <base format> specification are decimal numbers by default. Numbers that are written without a <size> specification have a default number
 of bits that is simulator- and machine-specific (must be at least 32).
 
 23456 // This is a 32-bit decimal number by default
@@ -18,33 +17,31 @@ of bits that is simulator- and machine-specific (must be at least 32).
 'o21 // This is a 32-bit octal number
 
 Underscore characters and question marks
-An underscore character "_" is allowed anywhere in a number except the first character.
-Underscore characters are allowed only to improve readability of numbers and are
+An underscore character "_" is allowed anywhere in a number except the first character. Underscore characters are allowed only to improve readability of numbers and are
 ignored by Verilog.
 
 A question mark "?" is the Verilog HDL alternative for z in the context of numbers.
 
-12'b1111_0000_1010 // Use of underline characters for readability
-4'b10?? // Equivalent of a 4'b10zz
+12'b1111_0000_1010 // Use of underline characters for readability 4'b10?? // Equivalent of a 4'b10zz
 
-A string is a sequence of characters that are enclosed by double quotes. The restriction on
-a string is that it must be contained on a single line, that is, without a carriage return. 
+A string is a sequence of characters that are enclosed by double quotes. The restriction on a string is that it must be contained on a single line, that is, without a carriage return. 
 
 Escaped Identifiers
-Escaped identifiers begin with the backslash ( \ ) character and end with whitespace
-(space, tab, or newline). All characters between backslash and whitespace are processed
-literally. Any printable ASCII character can be included in escaped identifiers. Neither
-the backslash nor the terminating whitespace is considered to be a part of the identifier.
+Escaped identifiers begin with the backslash ( \ ) character and end with whitespace (space, tab, or newline). All characters between backslash and whitespace are processed
+literally. Any printable ASCII character can be included in escaped identifiers. Neither the backslash nor the terminating whitespace is considered to be a part of the identifier.
 \a+b-c
 \**my_name**
 
 
-Vectors can be declared at [high# : low#] or [low# : high#], but the left number in the
-squared brackets is always the most significant bit of the vector. In the example shown
+Vectors can be declared at [high# : low#] or [low# : high#], but the left number in the squared brackets is always the most significant bit of the vector. In the example shown
 below, bit 0 is the most significant bit of vector virtual_addr.
 
-reg [0:40] virtual_addr; // Vector register, virtual address 41 bits
-wide
+reg [0:40] virtual_addr; // Vector register, virtual address 41 bits wide
+
+An integer is a general purpose register data type used for manipulating quantities.
+Integers are declared by the keyword integer. Although it is possible to use reg as a
+general-purpose variable, it is more convenient to declare an integer variable for purposes
+such as counting.
 ------------------------------------------------------------------------------------------------------------------------
 
 Source: https://www.youtube.com/watch?v=hgzuxRc7n6M&list=PLZU5hLL_713x0_AV_rVbay0pWmED7992G&index=7&ab_channel=AdiTeman
