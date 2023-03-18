@@ -27,6 +27,9 @@ A question mark "?" is the Verilog HDL alternative for z in the context of numbe
 12'b1111_0000_1010 // Use of underline characters for readability
 4'b10?? // Equivalent of a 4'b10zz
 
+A string is a sequence of characters that are enclosed by double quotes. The restriction on
+a string is that it must be contained on a single line, that is, without a carriage return. 
+
 ------------------------------------------------------------------------------------------------------------------------
 
 Source: https://www.youtube.com/watch?v=hgzuxRc7n6M&list=PLZU5hLL_713x0_AV_rVbay0pWmED7992G&index=7&ab_channel=AdiTeman
