@@ -30,6 +30,14 @@ A question mark "?" is the Verilog HDL alternative for z in the context of numbe
 A string is a sequence of characters that are enclosed by double quotes. The restriction on
 a string is that it must be contained on a single line, that is, without a carriage return. 
 
+Escaped Identifiers
+Escaped identifiers begin with the backslash ( \ ) character and end with whitespace
+(space, tab, or newline). All characters between backslash and whitespace are processed
+literally. Any printable ASCII character can be included in escaped identifiers. Neither
+the backslash nor the terminating whitespace is considered to be a part of the identifier.
+\a+b-c
+\**my_name**
+
 ------------------------------------------------------------------------------------------------------------------------
 
 Source: https://www.youtube.com/watch?v=hgzuxRc7n6M&list=PLZU5hLL_713x0_AV_rVbay0pWmED7992G&index=7&ab_channel=AdiTeman
