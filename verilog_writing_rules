@@ -42,6 +42,13 @@ An integer is a general purpose register data type used for manipulating quantit
 Integers are declared by the keyword integer. Although it is possible to use reg as a
 general-purpose variable, it is more convenient to declare an integer variable for purposes
 such as counting.
+
+
+Verilog HDL local parameters (defined using keyword localparam -) are identical to parameters except that they cannot be directly modified with the defparam statement
+or by the ordered or named parameter value assignment. The localparam keyword is used to define parameters when their values should not be changed. For example, the 
+state encoding for a state machine can be defined using localparam. The state encoding cannot be changed. This provides protection against inadvertent parameter 
+redefinition.
+
 ------------------------------------------------------------------------------------------------------------------------
 
 Source: https://www.youtube.com/watch?v=hgzuxRc7n6M&list=PLZU5hLL_713x0_AV_rVbay0pWmED7992G&index=7&ab_channel=AdiTeman
