@@ -64,9 +64,7 @@ Source: https://www.youtube.com/watch?v=hgzuxRc7n6M&list=PLZU5hLL_713x0_AV_rVbay
 -- Make sure that every if has an else block, specially in the combinational always block. Otherwise during synthesis.
 -- "assign" statement is used outside of always block, while to assign a variable inside the always block the blocking (=) and non-blockin (<=) assignment is used for
     combinational and sequential always block respectively. In that case the variable in LhS should be declared as "reg"
-    
-    
-    
+     
 || Note ||
 -- By default verilog treats all vectors as unsigned
 -- To make a constant signed add s after apostrophe, 10'sh37C
