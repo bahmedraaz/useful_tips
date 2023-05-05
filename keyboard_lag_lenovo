@@ -1,0 +1,7 @@
+Delete all FMAPP file from this location.
+C:\Program Files\Realtek\Audio\HDA
+Usually you will find the following files related to FMAPP
+1. FMAPP.dll.killed
+2. FMAPP.dlll
+3. FMAPP.exe
+4. FMAPP.exe.killed
