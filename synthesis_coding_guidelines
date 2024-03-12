@@ -1,6 +1,6 @@
 Combinationa Logic:
 ==================
-1. For combinational designs, all inputs must be in the sensitivity list
+1. All inputs to the combinational logic must be in the sensitivity list
 
 Sequential Logic:
 ================
