@@ -1,0 +1,9 @@
+package: onnx
+Error: ERROR: Failed building wheel for onnx
+Failed to build onnx
+ERROR: Could not build wheels for onnx, which is required to install pyproject.toml-based projects
+
+Solution: onnx does not have wheel files available for Python 3.12.
+This essentially leaves you two options (without introducing other accents such as docker):
+1. Use Python 3.11 instead
+2. Install whatever is necessary so you are able to build the onnx package from source
